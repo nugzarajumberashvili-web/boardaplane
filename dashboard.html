@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>✈️ Available Flights</h2>
+
+<div id="flights"></div>
+
+<script>
+let from="Tbilisi";
+let to="Paris";
+
+let cities=["Paris","Dubai","Tokyo","Rome","London","Berlin","Madrid","New York","Istanbul","Bangkok","Seoul","Amsterdam","Vienna"];
+
+let box=document.getElementById("flights");
+
+for(let i=0;i<10;i++){
+  let city=cities[Math.floor(Math.random()*cities.length)];
+  let price=Math.floor(Math.random()*400)+100;
+
+  let div=document.createElement("div");
+  div.className="card";
+
+  div.innerHTML=`
+    ✈️ ${from} → ${city}<br>
+    💰 ${price}₾ / $${(price/2.7).toFixed(2)}<br>
+    🕒 ${(Math.floor(Math.random()*12)+1)}:00
+  `;
+
+  box.appendChild(div);
+}
+</script>
+
+</body>
+</html>

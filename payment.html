@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Payment ✈️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2 style="text-align:center">💳 Payment</h2>
+
+<div class="card" style="width:320px; margin:30px auto; text-align:center;">
+
+  <p id="info"></p>
+
+  <input id="card" placeholder="Card Number (16 digits)">
+  <input id="cvv" placeholder="CVV (3 digits)">
+
+  <button onclick="pay()">PAY ✈️</button>
+
+</div>
+
+<script>
+// 👉 ამოვიღოთ არჩეული ფრენა
+let f = JSON.parse(localStorage.getItem("selected"));
+
+// ❗ თუ არაფერი არჩეულია
+if(!f){
+  document.getElementById("info").innerHTML =
+    "❌ No flight selected";
+}else{
+  document.getElementById("info").innerHTML = `
+    ✈️ ${f.from} → ${f.to}<br>
+    📅 ${f.date}<br>
+    🕒 ${f.time || "—"}<br>
+    💰 ${f.price}₾ / $${f.usd || ""}
+  `;
+}
+
+/* PAY */
+function pay(){
+
+  let card = document.getElementById("card").value.trim();
+  let cvv = document.getElementById("cvv").value.trim();
+
+  // validation
+  if(card.length < 12){
+    alert("❌ Invalid card number");
+    return;
+  }
+
+  if(cvv.length < 3){
+    alert("❌ Invalid CVV");
+    return;
+  }
+
+  let selected = JSON.parse(localStorage.getItem("selected"));
+
+  if(!selected){
+    alert("No flight selected");
+    return;
+  }
+
+  // 👉 ტიკეტის დამატება
+  let tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
+  tickets.push(selected);
+
+  localStorage.setItem("tickets", JSON.stringify(tickets));
+
+  // 👉 cleanup
+  localStorage.removeItem("selected");
+
+  alert("✅ Payment successful! Your ticket is booked ✈️");
+
+  window.location = "tickets.html";
+}
+</script>
+
+</body>
+</html>

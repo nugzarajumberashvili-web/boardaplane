@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tickets</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2 style="text-align:center">🎫 My Tickets</h2>
+
+<div id="tickets"></div>
+
+<script>
+function cancelTicket(i){
+  let arr=JSON.parse(localStorage.getItem("tickets")||"[]");
+  arr.splice(i,1);
+  localStorage.setItem("tickets",JSON.stringify(arr));
+  location.reload();
+}
+
+let arr=JSON.parse(localStorage.getItem("tickets")||"[]");
+let box=document.getElementById("tickets");
+
+arr.forEach((t,i)=>{
+
+  let div=document.createElement("div");
+  div.className="card";
+
+  div.innerHTML=`
+    ✈️ ${t.from} → ${t.to}<br>
+    📅 ${t.date}<br>
+    🕒 ${t.time}<br>
+    💰 ${t.price}₾ / $${t.usd}<br>
+
+    <button onclick="cancelTicket(${i})">❌ Cancel</button>
+  `;
+
+  box.appendChild(div);
+});
+</script>
+
+</body>
+</html>
