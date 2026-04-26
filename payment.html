@@ -21,10 +21,7 @@
 </div>
 
 <script>
-// 👉 ამოვიღოთ არჩეული ფრენა
 let f = JSON.parse(localStorage.getItem("selected"));
-
-// ❗ თუ არაფერი არჩეულია
 if(!f){
   document.getElementById("info").innerHTML =
     "❌ No flight selected";
@@ -37,13 +34,11 @@ if(!f){
   `;
 }
 
-/* PAY */
 function pay(){
 
   let card = document.getElementById("card").value.trim();
   let cvv = document.getElementById("cvv").value.trim();
 
-  // validation
   if(card.length < 12){
     alert("❌ Invalid card number");
     return;
@@ -61,13 +56,10 @@ function pay(){
     return;
   }
 
-  // 👉 ტიკეტის დამატება
   let tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
   tickets.push(selected);
 
   localStorage.setItem("tickets", JSON.stringify(tickets));
-
-  // 👉 cleanup
   localStorage.removeItem("selected");
 
   alert("✅ Payment successful! Your ticket is booked ✈️");
