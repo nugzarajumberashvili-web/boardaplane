@@ -23,9 +23,6 @@ window.onload = function(){
   }
 };
 
-/* =========================
-   AUTH OPEN / CLOSE
-========================= */
 function openAuth(){
   document.getElementById("auth").classList.remove("hidden");
   switchAuth("login");
@@ -35,9 +32,6 @@ function closeAuth(){
   document.getElementById("auth").classList.add("hidden");
 }
 
-/* =========================
-   SWITCH LOGIN / REGISTER
-========================= */
 function switchAuth(type){
 
   mode = type;
@@ -55,9 +49,6 @@ function switchAuth(type){
   }
 }
 
-/* =========================
-   AUTH (REGISTER / LOGIN)
-========================= */
 function auth(){
 
   let name = document.getElementById("name").value.trim();
@@ -71,7 +62,6 @@ function auth(){
 
   let users = JSON.parse(localStorage.getItem("users") || "[]");
 
-  /* REGISTER */
   if(mode === "register"){
 
     if(!name){
@@ -92,7 +82,6 @@ function auth(){
     alert("Registered ✔️ Welcome " + name);
   }
 
-  /* LOGIN */
   else{
 
     let found = users.find(u => u.email === email && u.pass === pass);
@@ -113,17 +102,11 @@ function auth(){
   closeAuth();
 }
 
-/* =========================
-   LOGOUT
-========================= */
 function logout(){
   localStorage.removeItem("user");
   location.reload();
 }
 
-/* =========================
-   SEARCH FLIGHTS
-========================= */
 function search(){
 
   let from = document.getElementById("from").value;
@@ -162,9 +145,6 @@ function search(){
     box.appendChild(div);
   }
 }
-
-/* =========================
-   BOOK FLIGHT
 ========================= */
 function book(f){
 
